@@ -212,7 +212,10 @@
     align-items: center;
   }
   .desc {
-    width: 98%;
+    width: 430px;
+    text-align: center;
+  }
+  .title {
     text-align: center;
   }
   .right-content-price {
@@ -249,6 +252,11 @@
     align-items: start;
     gap: 20px;
   }
+  .desc {
+    width: 380px;
+    text-align: center;
+  }
+ 
 }
 @media screen and (max-width: 490px) {
   .right-content-price {
