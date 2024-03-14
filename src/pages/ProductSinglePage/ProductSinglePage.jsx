@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProductSinglePage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -17,52 +17,30 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ProductSinglePage = () => {
   const { id } = useParams();
+  // Redux hook
   const dispatch = useDispatch();
   const product = useSelector(getProductSingle);
   const productSingleStatus = useSelector(getSingleProductStatus);
+  //state Variables
   const [currentImage, setCurrentImage] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
-
+  //show product 
   useEffect(() => {
-    dispatch(fetchAsyncProductSingle(id));
-  }, []);
+    dispatch(fetchAsyncProductSingle(id))
+      .then(() => setIsLoading(false))
+      .catch(() => setIsLoading(false));
+  }, [id]);
 
-  // Calculating discounted price
-  let discountedPrice =
-    product?.price - product?.price * (product?.discountPercentage / 100);
-  if (productSingleStatus === STATUS.LOADING) {
-    return <Loader />;
-  }
-     // Handling quantity increase
-     const increaseQty = () => {
-        setQuantity((prevQty) => {
-          let tempQty = prevQty + 1;
-          if (tempQty > product?.stock) tempQty = product?.stock;
-          return tempQty;
-        });
-      };
-    
-        // Handling quantity decrease
-      const decreaseQty = () => {
-        setQuantity((prevQty) => {
-          let tempQty = prevQty - 1;
-          if (tempQty < 1) tempQty = 1;
-          return tempQty;
-        });
-      };
-    
-  // Handling add to cart button click
-  const addToCartHandler = (product) => {
-    let discountedPrice =
+  const addToCartHandler = () => {
+    const discountedPrice =
       product?.price - product?.price * (product?.discountPercentage / 100);
-    let totalPrice = quantity * discountedPrice;
+    const totalPrice = quantity * discountedPrice;
 
-    dispatch(
-      addToCart({ ...product, quantity: quantity, totalPrice, discountedPrice })
-    );
+    dispatch(addToCart({ ...product, quantity, totalPrice, discountedPrice }));
 
-    // Show custom notification
+   // Show custom notification
     showCustomNotification();
   };
 
@@ -78,10 +56,30 @@ const ProductSinglePage = () => {
     });
   };
 
+  // Helper function to calculate discounted price
+  const calculateDiscountedPrice = () => {
+    return (
+      product?.price - product?.price * (product?.discountPercentage / 100)
+    );
+  };
+
+  // Helper function to increase quantity
+  const increaseQty = () => {
+    setQuantity((prevQty) => Math.min(prevQty + 1, product?.stock));
+  };
+
+  // Helper function to decrease quantity
+  const decreaseQty = () => {
+    setQuantity((prevQty) => Math.max(prevQty - 1, 1));
+  };
+  if (isLoading || productSingleStatus === STATUS.LOADING) {
+    return <Loader />;
+  }
   return (
     <div className="product-single">
-        <div className="product-single-title">Product/{product?.title}</div>
+      <div className="product-single-title">Product/{product?.title}</div>
       <div className="product-single-main">
+        {/* left section (pictures) */}
         <div className="product-single-left">
           <div className="left-main-img">
             <img
@@ -105,7 +103,9 @@ const ProductSinglePage = () => {
               ))}
           </div>
         </div>
+         {/* right section (content) */}
         <div className="product-single-right">
+         {/* content */}
           <div className="product-single-right-content">
             <div className="title">{product?.title}</div>
             <div>
@@ -131,60 +131,55 @@ const ProductSinglePage = () => {
             </div>
             <div className="right-content-price">
               <div className="old-price-content">
-                <div className="old-price">
-                    {formatPrice(product?.price)}
-                </div>
+                <div className="old-price">{formatPrice(product?.price)}</div>
                 <span>Inclusive of all taxes</span>
               </div>
               <div className="new-price-content">
                 <div className="new-price">
-                    {formatPrice(discountedPrice)}
+                  {formatPrice(calculateDiscountedPrice())}
                 </div>
                 <span className="discount">
                   {product?.discountPercentage}% OFF
                 </span>
               </div>
             </div>
+            {/* quantity */}
             <div className="right-content-qty">
-                  <div className="qty-text">Quantity:</div>
-                  <div className="qty-change ">
-                    <button
-                      type="button"
-                      className="qty-decrease "
-                      onClick={() => decreaseQty()}
-                    >
-                      <FaMinus size={20} />
-                    </button>
-                    <div className="qty-value">{quantity}</div>
-                    <button
-                      type="button"
-                      className="qty-increase"
-                      onClick={() => increaseQty()}
-                    >
-                      <FaPlus size={20} />
-                    </button>
-                  </div>
-                  {product?.stock === 0 ? (
-                    <div className="qty-error">out of stock</div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div className="right-content-button">
-                  <button type="button" className="button">
-                    <span
-                      onClick={() => {
-                        addToCartHandler(product);
-                      }}
-                    >
-                      add to cart
-                    </span>
-                    <FaCartShopping size={17} className="cart-icon"/>
-                  </button>
-                  <button type="button" className="button">
-                    buy now
-                  </button>
-                </div>
+              <div className="qty-text">Quantity:</div>
+              <div className="qty-change ">
+                <button
+                  type="button"
+                  className="qty-decrease "
+                  onClick={decreaseQty}
+                >
+                  <FaMinus size={20} />
+                </button>
+                <div className="qty-value">{quantity}</div>
+                <button
+                  type="button"
+                  className="qty-increase"
+                  onClick={increaseQty}
+                >
+                  <FaPlus size={20} />
+                </button>
+              </div>
+              {product?.stock === 0 && (
+                <div className="qty-error">out of stock</div>
+              )}
+            </div>
+            <div className="right-content-button">
+              <button
+                type="button"
+                className="button"
+                onClick={addToCartHandler}
+              >
+                <span>add to cart</span>
+                <FaCartShopping size={17} className="cart-icon" />
+              </button>
+              <button type="button" className="button">
+                Check Out
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -193,3 +188,4 @@ const ProductSinglePage = () => {
 };
 
 export default ProductSinglePage;
+
