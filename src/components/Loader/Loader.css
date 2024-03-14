@@ -1,0 +1,20 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100vw;
+}
+.shop-product .loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 60vw;
+}
+@media (max-width: 630px) {
+  .shop-product .loader {
+    height: 50vh;
+    width: 100vw;
+  }
+}

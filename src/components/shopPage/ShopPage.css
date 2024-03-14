@@ -1,0 +1,136 @@
+/*--------pagination-------  */
+
+.pagination-element{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--black-color);
+}
+.pagination-page-link{
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5 ease;
+}
+.pagination-active{
+    color: var(--black-color);
+    border: 1px solid var(--lightBlack-color);
+}
+.pagination-container{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    width: 100%;
+    gap: 15px;
+    cursor: pointer;
+}
+/*--------pagination end-------  */
+
+/*--------product banner-------  */
+.product-banner{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    position: absolute;
+    top: 0;
+    left: 45%;
+}
+  .product-banner-control{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .product-banner-control label {
+    font-size: 17px;
+    color: var(--lightBlack-color);
+  }
+  .numper-list{
+    width: 50px;
+    height: 34px;
+    padding: 0 5px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    background: var(--primary-color);
+    cursor: pointer;
+  }
+  .section-list {
+    width: 200px;
+    height: 34px;
+    padding: 0 5px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    background: var(--primary-color);
+    cursor: pointer;
+  }
+  /*--------product banner end-------  */
+
+  /*--------dark mode-------  */
+
+  .dark .product-banner-control label{
+    color: var(--primary-color);
+  }
+  .dark .section-list {
+    background: var(--lightBlack-color);
+    color: var(--white-color);
+  }
+  .dark .numper-list {
+    background: var(--lightBlack-color);
+    color: var(--white-color);
+  }
+ .dark .pagination-element{
+    color: var(--gray-color);
+}
+.dark .pagination-page-link{
+    background: var(--lightBlack-color);
+}
+.dark .pagination-active{
+    color: var(--primary-color);
+}
+/* ------ Responsive ----------  */ 
+@media (max-width: 820px) {
+  .product-banner{
+    top: 0;
+    left: 40%;
+}
+  .section-list {
+    width: 160px;
+  }
+}
+@media (max-width: 660px) {
+  .product-banner{
+    top: 0;
+    left: 40%;
+}
+  .section-list {
+    width: 140px;
+  }
+}
+@media (max-width: 630px) {
+  .product-banner{
+    top: 0;
+    left: 10%;
+}
+  .section-list {
+    width: 140px;
+  }
+  }
+  @media (max-width: 500px) {
+    .product-banner{
+      top: 0;
+      left: 7%;
+      gap: 20px;
+  }
+  .product-banner-control{
+    gap: 7px;
+  }
+  .product-banner-control label {
+    font-size: 15px;
+  }
+ }
+    

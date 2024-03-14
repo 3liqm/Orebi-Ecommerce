@@ -1,0 +1,28 @@
+/* best seller*/
+
+.best-seller .product-list{
+    display: grid; 
+    grid-template-columns: repeat(4, 25%); 
+  
+  }
+  @media (max-width: 1300px) {
+    .best-seller .product-list{
+        display: grid; 
+        grid-template-columns: repeat(3,33%); 
+      }
+  }
+  @media (max-width: 930px) {
+    .best-seller .product-list{
+        display: grid; 
+        grid-template-columns: repeat(2,48%); 
+      }
+  }
+  @media (max-width: 600px) {
+    .best-seller .product-list{
+        display: grid; 
+        grid-template-columns: repeat(1,100%); 
+        overflow-x: hidden;
+      }
+  }
+  
+  

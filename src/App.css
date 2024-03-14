@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  transition: 0.3s;
+  background: var(--white-color);
+  height: 100%;
+  overflow-x: hidden;
+}
+/*---category selected hover ---*/
+.selected {
+  background: var(--primary-color);
+}
+/*---botton---*/
+.button {
+  width: 250px;
+  height: 36px;
+  border: none;
+  border-radius: 5px;
+  color: var(--primary-color);
+  font-size: 16px;
+  outline: none;
+  background: var(--lightBlack-color);
+  cursor: pointer;
+}
+.button:active {
+  transform: scale(0.95);
+}
+/*----Dark Mode---*/
+.dark .selected {
+  background: var(--lightBlack-color);
+  transition: 0.5 ease;
+}

@@ -1,0 +1,21 @@
+.sections-title {
+    background: var(--primary-color);
+    color: var(--lightBlack-color);
+    margin: 50px 70px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  /* Dark Mode */
+.container.dark {
+  background: var(--black-color);
+}
+.dark .sections-title {
+  background: var(--lightBlack-color);
+  color: var(--primary-color);
+}
+/*----Responsive-----*/
+  @media (max-width: 650px) {
+    .sections-title{
+      margin: 50px 30px;
+    }
+  }

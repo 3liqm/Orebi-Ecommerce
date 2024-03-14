@@ -1,0 +1,81 @@
+.search-box-result {
+  width: 100%;
+  height: 90vh;
+  background-color: var(--white-color);
+  position: absolute;
+  top: 70px;
+  left: 0;
+  z-index: 1000;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+.search-box-result::-webkit-scrollbar {
+  display: none;
+}
+/*----no product h1 title----*/
+.search-box-result-noproduct {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10%;
+  color: var(--gray-color);
+}
+.search-box-result-menu {
+  display: flex;
+  background: var(--primary-color);
+  color: var(--lightBlack-color);
+  margin: 10px 5px;
+  border-radius: 5px;
+  width: 98%;
+  height: 100px;
+  box-shadow: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  gap: 8px;
+}
+.search-box-result-menu img {
+  width: 120px;
+  height: 100px;
+  border-radius: 5px;
+}
+.search-box-result-menu h1 {
+  font-size: 17px;
+}
+.search-box-result-menu p {
+  font-size: 12px;
+}
+.search-box-result-menu span {
+  font-size: 16px;
+  margin-right: 5px;
+}
+/*------ Dark mode --------*/
+.dark .search-box-result {
+  background: var(--black-color);
+}
+.dark .search-box-result-menu {
+  background: var(--lightBlack-color);
+  color: var(--primary-color);
+}
+/*---- Responsive--------*/
+@media (max-width: 825px) {
+  .search-box-result {
+    position: absolute;
+    top: 95px;
+  }
+}
+@media (max-width: 500px) {
+  .search-box-result-menu {
+    height: 100px;
+  }
+  .search-box-result-menu img {
+    width: 100px;
+    height: 100px;
+  }
+  .search-box-result-menu h1 {
+    font-size: 13px;
+  }
+  .search-box-result-menu p {
+    font-size: 9px;
+  }
+  .search-box-result-menu span {
+    font-size: 12px;
+  }
+}

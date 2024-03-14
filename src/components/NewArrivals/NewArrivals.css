@@ -1,0 +1,44 @@
+.new-arrivals .product-list{
+  display: flex;
+}
+/* arrows of new arrivals*/
+.arrows {
+  position: relative;
+  background: transparent !important;
+}
+.back-arrow {
+  position: absolute;
+  top: 180px;
+  left: 20px;
+  background: var(--lightGray-color);
+  padding: 16px 20px;
+  border-radius: 50%;
+  border: none;
+  z-index: 50;
+}
+.back-arrow:active {
+  transform: scale(0.9);
+}
+.next-arrow {
+  position: absolute;
+  top: 180px;
+  right: 20px;
+  background: var(--lightGray-color);
+  padding: 16px 20px;
+  border-radius: 50%;
+  border: none;
+  z-index: 50;
+}
+.next-arrow:active {
+  transform: scale(0.9);
+}
+@media (max-width: 500px) {
+  .back-arrow {
+    position: absolute;
+    top: 260px;
+  }
+  .next-arrow {
+    position: absolute;
+    top: 260px;
+  }
+}

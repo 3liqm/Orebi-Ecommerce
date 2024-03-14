@@ -1,0 +1,29 @@
+/* no product found*/
+.container{
+    width: 100%;
+    height: 100vh;
+}
+/* product search page*/
+.search-page-content .product-list{
+    display: grid; 
+    grid-template-columns: repeat(4, 25%); 
+  
+  }
+  @media screan and (max-width: 1300px) {
+    .search-page-content .product-list{
+        display: grid; 
+        grid-template-columns: repeat(3,33%); 
+      }
+  }
+  @media (max-width: 980px) {
+    .search-page-content .product-list{
+        display: grid; 
+        grid-template-columns: repeat(2,48%); 
+      }
+  }
+  @media (max-width: 680px) {
+    .search-page-content .product-list{
+        display: grid; 
+        grid-template-columns: repeat(1,98%); 
+      }
+  }
