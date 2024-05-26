@@ -88,7 +88,7 @@ const Shop = () => {
       {/* Toggle categories dropdown */}
       <div className="shop-main">
         {/*-------------sidebar lists section--------------------- */}
-        <div className="shop-categories">
+        <div className="shop-categoies">
           <div>
             <div
               className="shop-lists-title"
