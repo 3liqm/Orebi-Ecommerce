@@ -40,10 +40,10 @@ const HeaderBottom = ({ theme, setTheme }) => {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
-        setShow(false); 
+        setShow(false);
       }
       if (userRef.current && !userRef.current.contains(e.target)) {
-        setShowUser(false); 
+        setShowUser(false);
       }
     };
     document.body.addEventListener("click", handleClickOutside);
@@ -59,6 +59,7 @@ const HeaderBottom = ({ theme, setTheme }) => {
   const handleCategoryClick = (selectedCategory) => {
     setSelectedOption(selectedCategory);
   };
+
   return (
     <div className="header-bottom">
       <div className="header-bottom-main">
@@ -73,7 +74,7 @@ const HeaderBottom = ({ theme, setTheme }) => {
               ref={ref}
               className="header-bottom-left-main"
             >
-              {/* category part icon*/}
+              {/* category part icon */}
               <HiOutlineMenuAlt4 size={25} className="icons" />
               <p className="icons">Shop by Category</p>
 
@@ -89,7 +90,7 @@ const HeaderBottom = ({ theme, setTheme }) => {
                     {categories.map((category, idx) => (
                       <Link
                         key={idx}
-                        to={`category/${category}`}
+                        to={`/category/${category.slug}`} 
                         className="category-motion-list-link"
                       >
                         <li
@@ -98,7 +99,7 @@ const HeaderBottom = ({ theme, setTheme }) => {
                             selectedOption === category ? "selected" : ""
                           }
                         >
-                          {category}
+                          {category.name}{" "}
                         </li>
                       </Link>
                     ))}
