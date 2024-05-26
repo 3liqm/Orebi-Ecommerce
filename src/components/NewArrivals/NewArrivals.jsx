@@ -28,7 +28,7 @@ const NewArrivals = () => {
 
   useEffect(() => {
     // Fetch a list of products with a limit of 100 items.
-    dispatch(fetchAsyncProducts(50));
+    dispatch(fetchAsyncProducts(150));
   }, [dispatch]);
 
   const products = useSelector(getAllProducts);
@@ -36,7 +36,7 @@ const NewArrivals = () => {
 
   // Randomizing the products in the list to display a variety.
   const getRandomizedProducts = (count) => {
-    const tempProducts = [...products.slice(0, 40)];
+    const tempProducts = [...products.slice(0, 150)];
     const selectedProducts = [];
 
     for (let i = 0; i < count && tempProducts.length > 0; i++) {
