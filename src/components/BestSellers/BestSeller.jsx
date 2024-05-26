@@ -17,14 +17,14 @@ const BestSeller = () => {
 
   useEffect(() => {
     // Fetch a list of products with a limit of 10 items.
-    dispatch(fetchAsyncProducts(10));
+    dispatch(fetchAsyncProducts(100));
   }, [dispatch]);
   const products = useSelector(getAllProducts);
   const productStatus = useSelector(getAllProductsStatus);
 
   // Randomizing the products in the list to display a variety.
   const getRandomizedProducts = (count) => {
-    const tempProducts = [...products.slice(0, 10)];
+    const tempProducts = [...products.slice(0, 100)];
     const selectedProducts = [];
 
     for (let i = 0; i < count && tempProducts.length > 0; i++) {
