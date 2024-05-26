@@ -27,20 +27,19 @@ const Shop = () => {
   const categoryProducts = useSelector(getAllProductsByCategory);
   const productStatus = useSelector(getCategoryProductsStatus);
 
-  //states to open and close lists
+  // States to open and close lists
   const [isCategoriesListOpen, setIsCategoriesListOpen] = useState(true);
   const [isColorListOpen, setIsColorListOpen] = useState(true);
   const [isBrandListOpen, setIsBrandListOpen] = useState(true);
   const [isPriceListOpen, setIsPriceListOpen] = useState(true);
-  //states to open and close lists end
 
-  //state to make in single page 12 product
+  // State to make in single page 12 product
   const [itemsPerPage, setItemsPerPage] = useState(12);
 
-  //state to open select categories and start with all product
+  // State to open select categories and start with all product
   const [selectedSort, setSelectedSort] = useState("All Product");
-  
-  //state to open and hover select categories 
+
+  // State to open and hover select categories
   const [selectedOption, setSelectedOption] = useState(null);
 
   // Set items per page from banner
@@ -57,8 +56,8 @@ const Shop = () => {
   // Handle click on a specific category
   const handleCategoryClick = (selectedCategory) => {
     setSelectedOption(selectedCategory);
-    dispatch(fetchAsyncProductsOfCategory(selectedCategory));
-    setSelectedSort(selectedCategory);
+    dispatch(fetchAsyncProductsOfCategory(selectedCategory.slug));
+    setSelectedSort(selectedCategory.name);
   };
 
   // Handle click on "All Product" category
@@ -75,20 +74,21 @@ const Shop = () => {
     setItemStart(newOffset + 1);
 
     // Update items per page when changing the page
-    setItemsPerPage(itemsPerPage); // Set itemsPerPage based on the new page
+    setItemsPerPage(itemsPerPage);
   };
 
   // Open "All Product" on initial page load
   useEffect(() => {
     handleAllProductsClick();
   }, []);
+
   return (
     <div className="shop">
       <Titles title={"Products In Our Shop"} />
       {/* Toggle categories dropdown */}
       <div className="shop-main">
         {/*-------------sidebar lists section--------------------- */}
-        <div className="shop-categoies">
+        <div className="shop-categories">
           <div>
             <div
               className="shop-lists-title"
@@ -113,17 +113,20 @@ const Shop = () => {
               >
                 <ul className="motion-categories-list">
                   {/* Clicking "All Product" sets the sort to display all products */}
-                  <li onClick={handleAllProductsClick} className="selected">
+                  <li
+                    onClick={handleAllProductsClick}
+                    className={selectedSort === "All Product" ? "selected" : ""}
+                  >
                     All Product
                   </li>
                   {/* Map through categories and handle click for each */}
-                  {categories.map((category, idx) => (
+                  {categories.map((category) => (
                     <li
-                      key={idx}
+                      key={category.id}
                       onClick={() => handleCategoryClick(category)}
                       className={selectedOption === category ? "selected" : ""}
                     >
-                      {category}
+                      {category.name}
                     </li>
                   ))}
                 </ul>
@@ -158,13 +161,13 @@ const Shop = () => {
                   </li>
                   <li>
                     <span className="gray"></span> Gray
-                  </li>{" "}
+                  </li>
                   <li>
                     <span className="red"></span> Red
-                  </li>{" "}
+                  </li>
                   <li>
                     <span className="yellow"></span> Yellow
-                  </li>{" "}
+                  </li>
                   <li>
                     <span className="blue"></span> Blue
                   </li>
